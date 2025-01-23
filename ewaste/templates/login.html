@@ -1,0 +1,58 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Style -->
+  {% comment %} <link rel="stylesheet" href="{% static 'css/logincss.css' %}"> {% endcomment %}
+
+  <title>Multiple User Login</title>
+</head>
+
+<body class="bg-gradient">
+  <div class="container d-flex align-items-center justify-content-center vh-100">
+    <div class="card shadow" style="width: 100%; max-width: 400px;">
+      <div class="card-body">
+        <h2 class="text-center text-primary mb-4">E-waste</h2>
+        <hr>
+        <h4 class="text-center text-muted mb-4">Login Page</h4>
+        
+        <span class="text-center mb-4  text-danger">
+          {% if msg %}
+          {{ msg | safe }}
+          {% endif %}
+      </span>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username" class="text-dark">Username</label>
+            {{ form.username }}
+          </div>
+          <div class="form-group">
+            <label for="password" class="text-dark">Password</label>
+            {{ form.password}}
+          </div>
+
+          <div class="form-check mb-4">
+            <input type="checkbox" class="form-check-input" id="rememberMe" checked>
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+            <a href="#" class="float-right text-primary">Forgot Password?</a>
+          </div>
+          <span class="text-danger">{{ form.errors }}</span>
+          <a href="{% url 'register' %}" class="d-block text-center mb-3 text-primary">Register me</a>
+          <button type="submit" class="btn btn-success btn-block">Log In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+/* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+.admin-header .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.admin-content {
+    padding: 40px 0;
+}
+
+thead.thead-dark {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table-bordered {
+    background-color: #fff;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.admin-footer {
+    margin-top: 50px;
+    background-color: #343a40;
+}
+
+.admin-footer p {
+    margin: 0;
+}
+
+button, a.btn {
+    cursor: pointer;
+}
+
+
+
+/* Ensures that the canvas elements take full width inside their containers */
+canvas {
+    width: 100%;
+    height: auto;
+}
+
+/* Adds some margin to separate the chart columns */
+.col-md-6 {
+    padding: 15px;
+}
+
+/* Adds some margin to the top and bottom of the hr line for better spacing */
+hr {
+    margin: 20px 0;
+    border: 1px solid #ccc;
+}
+
+
+
+.admin-footer {
+    margin-top: 50px;
+    background-color: #343a40;
+}
+
+.admin-footer p {
+    margin: 0;
+}
+
+button, a.btn {
+    cursor: pointer;
+} 

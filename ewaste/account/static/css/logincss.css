@@ -1,0 +1,19 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #ffafbd, #ffc3a0); /* Colorful background */
+}
+
+.card {
+  border-radius: 15px; /* Rounded corners for the card */
+}
+
+h2 {
+  font-size: 28px;
+}
+
+hr {
+  margin: 20px 0;
+}

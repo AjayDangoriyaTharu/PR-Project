@@ -1,0 +1,76 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Input</title>  
+    {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/input.css' %}"/>  
+</head>  
+<body>  
+
+
+  <header class="admin-header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+              <strong>
+                {{ user.username }}
+              </strong>
+            </a>
+            <a class="nav-link btn btn-primary text-white" href="{% url 'login' %}">Logout</a>
+                 
+        </div>
+    </nav>
+</header>
+
+
+<form method="POST" class="post-form" action="/customer">  
+        {% csrf_token %}  
+  <div class="container">  
+<br>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <h3>Enter Details</h3>  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Full Name:</label>  
+    <div class="col-sm-4">  
+      {{ form.fullname }}  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Phone no:</label>  
+    <div class="col-sm-4">  
+      {{ form.phoneno }}  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Date :</label>  
+    <div class="col-sm-4">  
+      {{ form.date }}  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+  <label class="col-sm-2 col-form-label">No of Items :</label>  
+  <div class="col-sm-4">  
+    {{ form.NoItems }}  
+  </div>  
+</div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Address :</label>  
+    <div class="col-sm-4">  
+      {{ form.address }}  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-primary">Submit</button>  
+    </div>  
+  </div>  
+    </div>  
+</form>  
+</body>  
+</html>  

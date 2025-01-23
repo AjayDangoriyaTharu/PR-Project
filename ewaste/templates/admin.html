@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    {% load static %}
+	<title>Ewaste</title>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'adminstatic/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'adminstatic/css/fonts.css' %}">
+	<link rel="stylesheet" href="{% static 'adminstatic/css/main.css' %}" class="color-switcher-link">
+	<link rel="stylesheet" href="{% static 'adminstatic/css/dashboard.css' %}" class="color-switcher-link">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'adminstatic/css/report.css'%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+  
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+    
+
+</head>
+
+<body class="admin">
+	<div class="preloader">
+		<div class="preloader_image"></div>
+	</div>
+	<div class="modal fade" tabindex="-1" role="dialog" id="messages_modal">
+		<div class="fw-messages-wrap ls with_padding">
+		</div>
+	</div>
+	<!-- eof .modal -->
+
+	<!-- wrappers for visual page editor and boxed version of template -->
+	<div id="canvas">
+		<div id="box_wrapper">
+
+			<!-- template sections -->
+
+			<header class="page_header_side page_header_side_sticked active-slide-side-header ds">
+				<div class="side_header_logo ds ms">
+					<a href="#">
+						<span class="logo_text playfair margin_0">
+							Ewaste 
+						</span>
+					</a>
+				</div>
+				<span class="toggle_menu_side toggler_light header-slide">
+					<span></span>
+				</span>
+				<div class="scrollbar-macosx">
+					<div class="side_header_inner">
+
+						<!-- user -->
+
+						<div class="user-menu">
+
+
+							<ul class="menu-click">
+								<li>
+									<a href="#">
+										<div class="media">
+											<div class="media-left media-middle">
+												<img src="{% static 'custstatic/images/team/02.jpg' %}" alt="">
+											</div>
+											<div class="media-body media-middle">
+												<h4>{{user.username}}</h4>
+												Administrator
+
+											</div>
+
+										</div>
+									</a>
+									<ul>
+										<li>
+											<a href="#">
+												<i class="fa fa-user"></i>
+												Profile
+											</a>
+										</li>
+										
+									
+										<li>
+											<a href="{% url 'login'%}">
+												<i class="fa fa-sign-out"></i>
+												Log Out
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+
+						</div>
+
+
+					</div>
+				</div>
+			</header>
+
+			<header class="page_header header_darkgrey">
+				<div class="widget widget_search">
+					<div class="side_header_logo ds ms">
+						<a href="#">
+							<span class="logo_text playfair margin_0">
+								Recycling Admin Dashboard
+							</span>
+						</a>
+					</div>
+				</div>
+
+				<!-- eof .header_right_buttons -->
+			</header>
+
+			<section class="ls with_bottom_border">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<ol class="breadcrumb darklinks">
+								<li>
+									<a href="#">Homepage</a>
+								</li>
+								<li class="active">Dashboard
+
+								</li>
+								<li>
+									<a href="#pickuptable">
+										<i class="fa fa-user"></i>
+										PickUp
+									</a>
+								</li>
+								
+							</ol>
+						</div>
+						<!-- .col-* -->
+
+						<!-- .col-* -->
+					</div>
+					<!-- .row -->
+				</div>
+				<!-- .container -->
+			</section>
+
+			<section class="ls section_padding_top_50 section_padding_bottom_50 columns_padding_10">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-4">
+							<h3 class="dashboard-page-title"> Admin Dashboard
+							</h3>
+						</div>
+
+						<div class="col-md-8 text-md-right">
+							<h3 class="sparklines-title">
+								<sup>Today Recycled:</sup>
+
+								10000
+
+
+							</h3>
+
+							<h3 class="sparklines-title">
+								<sup>Yesterday Recycled: </sup>
+								4000
+
+							</h3>
+
+						</div>
+
+
+					</div>
+					<!-- .row -->
+
+					<center class="row"> 
+					</center> 
+					<hr /> 
+					<div class="row"> 
+					  <div class="col-md-6"> 
+						<canvas id="myChartline"></canvas> 
+					  </div> 
+					  <div class="col-md-6"> 
+						<canvas id="myChartBar"></canvas> 
+					  </div> 
+					</div> 
+					
+					<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
+					
+					<script> 
+					  var endpoint = 'api'; 
+					
+					  $.ajax({ 
+						method: "GET", 
+						url: endpoint, 
+						success: function(data) { 
+						  drawLineGraph(data, 'myChartline'); 
+						  drawBarGraph(data, 'myChartBar'); 
+						  console.log("drawing"); 
+						}, 
+						error: function(error_data) { 
+						  console.log(error_data); 
+						} 
+					  }) 
+					
+					
+					  function drawLineGraph(data, id) { 
+						var labels = data.labels; 
+						var chartLabel = data.chartLabel; 
+						var chartdata = data.chartdata; 
+						var ctx = document.getElementById(id).getContext('2d'); 
+						var chart = new Chart(ctx, { 
+						  // The type of chart we want to create 
+						  type: 'line', 
+					
+						  // The data for our dataset 
+						  data: { 
+							labels: labels, 
+							datasets: [{ 
+							  label: chartLabel, 
+							  backgroundColor: 'rgb(255, 100, 200)', 
+							  borderColor: 'rgb(55, 99, 132)', 
+							  data: chartdata, 
+							}] 
+						  }, 
+					
+						  // Configuration options go here 
+						  options: { 
+							scales: { 
+							  xAxes: [{ 
+								display: true 
+							  }], 
+							  yAxes: [{ 
+								ticks: { 
+								  beginAtZero: true 
+								} 
+							  }] 
+							} 
+						  } 
+					
+						}); 
+					  } 
+					
+					  function drawBarGraph(data, id) { 
+						var labels = data.labels; 
+						var chartLabel = data.chartLabel; 
+						var chartdata = data.chartdata; 
+						var ctx = document.getElementById(id).getContext('2d'); 
+						var myChart = new Chart(ctx, { 
+						  type: 'bar', 
+						  data: { 
+							labels: labels, 
+							datasets: [{ 
+							  label: chartLabel, 
+							  data: chartdata, 
+							  backgroundColor: [ 
+								'rgba(255, 99, 132, 0.2)', 
+								'rgba(54, 162, 235, 0.2)', 
+								'rgba(255, 206, 86, 0.2)', 
+								'rgba(75, 192, 192, 0.2)', 
+								'rgba(153, 102, 255, 0.2)', 
+								'rgba(255, 159, 64, 0.2)' 
+							  ], 
+							  borderColor: [ 
+								'rgba(255, 99, 132, 1)', 
+								'rgba(54, 162, 235, 1)', 
+								'rgba(255, 206, 86, 1)', 
+								'rgba(75, 192, 192, 1)', 
+								'rgba(153, 102, 255, 1)', 
+								'rgba(255, 159, 64, 1)' 
+							  ], 
+							  borderWidth: 1 
+							}] 
+						  }, 
+						  options: { 
+							scales: { 
+							  yAxes: [{ 
+								ticks: { 
+								  beginAtZero: true 
+								} 
+							  }] 
+							} 
+						  } 
+						}); 
+					  } 
+					</script> 
+				
+
+					<table id='pickuptable' class="table table-bordered mt-4">
+						<thead class="thead-dark">
+							<tr>
+								<th>Full Name</th>
+								<th>Phone No</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>No of Items</th>
+								<th>Address</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for data in pickupdata %}  
+							<tr>
+								<td>{{ data.fullname}}</td>
+								<td>{{ data.phoneno}}</td>
+								<td>{{ data.date}}</td>
+								<td>{{ data.time}}</td>
+								<td>{{ data.NoItems}}</td>
+								<td>{{ data.address}}</td>
+								<td>
+									<a href="/edit/{{data.id}}" class="btn btn-warning btn-sm">PickUp</a>
+									<a href="/delete/{{data.id}}" class="btn btn-danger btn-sm">Delete</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+				<!-- .container -->
+			</section>
+
+			<section class="page_copyright ds darkblue_bg_color">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6">
+							<p class="grey">&copy; Copyrights 2024</p>
+						</div>
+						<div class="col-sm-6 text-sm-right">
+							<p class="grey">Last account activity <i class="fa fa-clock-o"></i> 52 mins ago</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+		<!-- eof #box_wrapper -->
+	</div>
+	<!-- eof #canvas -->
+
+
+
+	<script src="{% static 'adminstatic/js/compressed.js' %}"></script>
+	<script src="{% static 'adminstatic/js/main.js' %}"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

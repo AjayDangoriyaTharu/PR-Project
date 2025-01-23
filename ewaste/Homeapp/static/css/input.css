@@ -1,0 +1,80 @@
+/* Reset some default styles */
+body, h3, label, button {
+    margin: 0;
+    padding: 0;
+}
+
+/* General body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e0f7fa; /* Light aqua background */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header styles */
+.admin-header {
+    background-color: #004d40; /* Dark teal for the header */
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    margin-left: auto;
+}
+
+/* Form container */
+.container {
+    max-width: 600px; /* Limit the width for better readability */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Form heading */
+h3 {
+    color: #00796b; /* Teal color for the heading */
+    margin-bottom: 20px;
+}
+
+/* Form field styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #00796b; /* Teal button */
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #004d40; /* Darker shade on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .form-group {
+        flex-direction: column; /* Stack label and input on small screens */
+    }
+
+    .col-sm-2, .col-sm-4 {
+        flex: none; /* Remove flex styles for small screens */
+        width: 100%; /* Make them full width */
+    }
+}

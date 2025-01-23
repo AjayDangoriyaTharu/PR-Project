@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/admin.css'%}">
+</head>
+<body>
+
+<!-- Header -->
+<header class="admin-header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">  
+                    <li class="nav-item">
+                        <!-- <a class="nav-link btn btn-primary text-white" href="{% url 'report' %}">Report</a> -->
+                    </li>
+                </ul>
+                <ul class="navbar-nav">  
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white" href="{% url 'login' %}">Logout</a>
+                    </li>
+                </ul></div>
+        </div>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main class="admin-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mt-4">Welcome to the Admin Dashboard</h2>
+                <p>Use the buttons above to manage user data and perform necessary actions like updating, deleting records, or logging out.</p>
+
+                <!-- Example Table of User Records -->
+                <table class="table table-bordered mt-4">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Phone No</th>
+                            <th>Date</th>
+                            <th>No of Items</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in pickupdata %}  
+                        <tr>
+                            <td>{{ data.fullname}}</td>
+                            <td>{{ data.phoneno}}</td>
+                            <td>{{ data.date}}</td>
+                            <td>{{ data.NoItems}}</td>
+                            <td>{{ data.address}}</td>
+                            <td>
+                                <a href="/edit/{{data.id}}" class="btn btn-warning btn-sm">PickUp</a>
+                                <a href="/delete/{{data.id}}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="admin-footer bg-dark text-white text-center py-3">
+    <p>&copy; 2024 Admin Panel. All Rights Reserved.</p>
+</footer>
+
+<!-- JavaScript for Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
